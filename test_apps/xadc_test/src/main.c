@@ -12,10 +12,10 @@ int main()
     char pathCh14[100];
     char pathCh15[100];
 
-    sprintf(pathCh6, "/sys/bus/platform/devices/43c10000.xadc_wiz/iio:device1/in_voltage8_vaux6_raw");
-    sprintf(pathCh7, "/sys/bus/platform/devices/43c10000.xadc_wiz/iio:device1/in_voltage9_vaux7_raw");
-    sprintf(pathCh14, "/sys/bus/platform/devices/43c10000.xadc_wiz/iio:device1/in_voltage10_vaux14_raw");
-    sprintf(pathCh15, "/sys/bus/platform/devices/43c10000.xadc_wiz/iio:device1/in_voltage11_vaux15_raw");
+    sprintf(pathCh6, "/sys/bus/platform/devices/43c00000.xadc_wiz/iio:device1/in_voltage8_raw");
+    sprintf(pathCh7, "/sys/bus/platform/devices/43c00000.xadc_wiz/iio:device1/in_voltage9_raw");
+    sprintf(pathCh14, "/sys/bus/platform/devices/43c00000.xadc_wiz/iio:device1/in_voltage10_raw");
+    sprintf(pathCh15, "/sys/bus/platform/devices/43c00000.xadc_wiz/iio:device1/in_voltage11_raw");
 
     if ((fptr = fopen(pathCh6, "r")) == NULL) {
         printf("Error! File cannot be opened.");

@@ -57,7 +57,7 @@ This entire proces is made and tested on an ubuntu 18.04.5 LTS machine using the
     cd dts
     dtc -I dts -O dtb -o devicetree.dtb system-top.dts
     ````
-6. Put the buildroot output files (`buildroot/output/zybo_linux_linaro/images/sdcard`) on a fat32 formatted SD card and boot from it. Scp the .dtb file and bitstream to the zybo and set them using `fw_set_bitsream` and `fw_set_devicetree`. Reboot the Zybo and everything should work.
+6. Put the buildroot output files (`buildroot/output/zybo_linux_linaro/images/sdcard`) on a fat32 formatted SD card and boot from it. Scp the .dtb file and bitstream to the zybo and set them using `fw_setbitsream` and `fw_setdevicetree`. Reboot the Zybo and everything should work.
 
 ## Test/Demo
 Some small test/demo applications for testing the features included in the image are located in the `test_apps` folder.
