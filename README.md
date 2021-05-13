@@ -6,7 +6,6 @@
 * XADC
 
 ### To do
-* Better README
 * Add extra communication protocols to image (I2C, SPI, UART)
 * Investigate I2C acknowledge
 * Investigate SPI slave select lines
@@ -22,7 +21,7 @@ This entire proces is made and tested on an ubuntu 18.04.5 LTS machine using the
 	./build.py -c board/mathworks/zynq/boards/zyboz7/catalog.xml
 	````
 4. Unzip the Vivado (2018.2) project, make the desired changes to the block diagram, generate a bitstream and export the hardware.
-5. Generate a device tree using the [xilinx device-tree-generator](board/mathworks/zynq/boards/zyboz7/catalog.xml).
+5. Generate a device tree using the [xilinx device-tree-generator](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842279/Build+Device+Tree+Blob).
     ````
     cd SoC_Z7_MBD_Platform/
     bash /opt/Xilinx/SDK/2018.2/bin/xsct
