@@ -7,7 +7,9 @@
     aliases {
         serial0 = &uart1;
         serial1 = &axi_uartlite_0;
-        serial2 = &axi_uart16550_0;
+        serial2 = &axi_uartlite_1;
+        serial3 = &axi_uart16550_0;
+        serial4 = &axi_uart16550_1;
     };
 };
 
