@@ -7,6 +7,7 @@
 * PS uart, 2 x uartlite and 2 x uart16550.
 * 2 x PS I2C. (Listed in user space but not yet tested in C app).
 * PS spi controller with 3 slave selects. (Listed in user space but not yet tested in C app).
+* Switches, buttons, leds and rgb leds accessible in user space.
 
 ### To do
 * Investigate I2C acknowledge
