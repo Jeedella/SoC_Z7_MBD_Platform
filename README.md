@@ -49,7 +49,7 @@ This entire proces is made and tested on an ubuntu 18.04.5 LTS machine using bot
     ````
     bash /opt/Xilinx/SDK/2018.2/bin/xsct
     hsi open_hw_design buildroot_project/buildroot_project.sdk/matlab_buildroot_top.hdf 
-    hsi set_repo_path device-tree-xlnx/
+    hsi set_repo_path ../device-tree-xlnx/
     hsi create_sw_design device_tree -os device_tree -proc ps7_cortexa9_0
     hsi generate_target -dir dts
     hsi close_hw_design matlab_buildroot_top
