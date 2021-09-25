@@ -1,5 +1,5 @@
 test_apps/*/build/
-dts
+*/dts
 */bd/*/
 */bd/*.*x*
 */NA/

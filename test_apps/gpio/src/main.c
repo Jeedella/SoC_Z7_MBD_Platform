@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
         // Is printing strange info, Outputs are listed as inputs even when configured as outputs in the device tree
         for (int k = 0; k < cinfo[i].lines; k++) {
             linfo.line_offset = k;
-            ret = ioctl(fd[0], GPIO_GET_LINEINFO_IOCTL, &linfo);
+            ret = ioctl(fd[i], GPIO_GET_LINEINFO_IOCTL, &linfo);
             if (ret == -1) {
                 ret = -errno;
                 fprintf(stderr, "Failed to issue %s (%d)\n", "GPIO_GET_LINEINFO_IOCTL", ret);
@@ -155,7 +155,7 @@ int main(int argc, char *argv[])
         }
 
         // Copy switch values to rgb values, switch 4 is therefore unused
-        for (int i = 0; i < cinfo[3].lines; i++) {
+        for (int i = 0; i < 3; i++) {
             ret = ioctl(rswi[i].fd, GPIOHANDLE_GET_LINE_VALUES_IOCTL, &dget);
             if (ret == -1) {
                 ret = -errno;
@@ -170,6 +170,16 @@ int main(int argc, char *argv[])
                 ret = -errno;
                 fprintf(stderr, "Failed to issue %s (%d)\n", "GPIOHANDLE_SET_LINE_VALUES_IOCTL", ret);
                 return ret;
+            }
+
+            // If more than three lines exist, meaning we run this program on the z20, also set the second RGB
+            if (cinfo[3].lines > 3) {
+                ret = ioctl(rrgb[i+3].fd, GPIOHANDLE_SET_LINE_VALUES_IOCTL, &dset);
+                if (ret == -1) {
+                    ret = -errno;
+                    fprintf(stderr, "Failed to issue %s (%d)\n", "GPIOHANDLE_SET_LINE_VALUES_IOCTL", ret);
+                    return ret;
+                }
             }
         }
     }
