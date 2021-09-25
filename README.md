@@ -76,7 +76,7 @@ Reading the values of all four XADC channels can be done using:
 ````
 
 ### Uart
-For the UART demo, connect the rx and tx of one implemtation using a male to male jumper wire.
+For the UART demo, connect the rx and tx of one interface using a male to male jumper wire.
 Pass that corresponding tty as an argument of the app. Below is an example for UARTLite shown.
 ````
 /mnt/test_apps/uart.app /dev/ttyUL1
