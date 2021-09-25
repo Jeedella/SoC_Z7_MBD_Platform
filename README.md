@@ -27,7 +27,7 @@
 This entire proces is made and tested on an ubuntu 18.04.5 LTS machine using both the Zybo z10 & z20 as a target.
 1. Install buildroot dependencies located in `buildroot/docs/manuals/prerequisits.txt` and copy/replace the `catalog.xml`, `defconfig` and `kconfig` from the `buildroot-config` folder into `buildroot/board/mathworks/zynq/boards/zyboz7/`.
    ````
-   mv buildroot-config/* buildroot/board/mathworks/zynq/boards/zyboz7/
+   cp buildroot-config/* buildroot/board/mathworks/zynq/boards/zyboz7/
    ````
 2. Install [linaro toolchain](https://releases.linaro.org/components/toolchain/binaries/6.3-2017.02/arm-linux-gnueabihf/) in `/opt`. Rename the folder in such a way that the path is: `/opt/linaro/aarch32-6.3.1-2017.02`.
 3. Build the buildroot image: (Will take some time)
