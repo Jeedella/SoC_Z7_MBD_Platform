@@ -66,7 +66,29 @@ This entire proces is made and tested on an ubuntu 18.04.5 LTS machine using bot
 5.  Scp the `dts/devicetree.dtb` and `zybo-zx0/buildroot_project/buildroot_project.runs/impl_1/matlab_buildroot_top.bit` to the zybo and set them using `fw_setbitsream` and `fw_setdevicetree`. Reboot the Zybo and everything should work.
 
 ## Test/Demo
-Some small test/demo applications for testing the features included in the image are located in the `test_apps` folder.
+When using a pre-build image, some test/demo applications are included and accesible in `/mnt/test_apps`.
+The source files for these apps are located in the `test_apps` folder of this repository.
+
+### XADC
+Reading the values of all four XADC channels can be done using:
+````
+/mnt/test_apps/xadc.app
+````
+
+### Uart
+For the UART demo, connect the rx and tx of one implemtation using a male to male jumper wire.
+Pass that corresponding tty as an argument of the app. Below is an example for UARTLite shown.
+````
+/mnt/test_apps/uart.app /dev/ttyUL1
+````
+It will send and receive `Hello, world!` if all is connected properly.
+
+### Gpio
+An interactive demo for testing the switches, buttons, leds and RGB leds can be run with:
+````
+/mnt/test_apps/gpio.app
+````
+The buttons are controlling the leds, and three of the switches control the RGB colors.
 
 ## Pinout
 | Pin | PMOD-B (z20 only) | PMOD-E       | PMOD-F |
