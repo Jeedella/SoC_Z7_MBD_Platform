@@ -4,7 +4,7 @@
 
 ### Implemented
 * XADC
-* PS uart, uartlite uart16550 and.
+* PS uart, uartlite and uart16550.
   * 1x uartlite and uart16550 on the Zybo z10.
   * 2x uartlite and uart16550 on the Zybo z20.
 * 2 x PS I2C. (Listed in user space but not yet tested in C app).
