@@ -43,7 +43,7 @@ This entire proces is made and tested on an ubuntu 18.04.5 LTS machine using bot
    ````
    cd zybo-zx0
    vivado -source init_project.tcl
-   ```
+   ````
 3. Make the necessary adjustments to the vivado project, generate a bitstream and export the hdf.
 4. Generate a device tree using the [xilinx device-tree-generator](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842279/Build+Device+Tree+Blob).
     ````
