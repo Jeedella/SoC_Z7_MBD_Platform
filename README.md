@@ -4,30 +4,51 @@
 
 ### Implemented
 * XADC
-* PS uart, 2 x uartlite and 2 x uart16550.
+* PS uart, uartlite uart16550 and.
+  * 1x uartlite and uart16550 on the Zybo z10.
+  * 2x uartlite and uart16550 on the Zybo z20.
 * 2 x PS I2C. (Listed in user space but not yet tested in C app).
 * PS spi controller with 3 slave selects. (Listed in user space but not yet tested in C app).
-* Switches, buttons, leds and rgb leds accessible in user space.
+* Switches, buttons, leds and rgb leds accessible in user space using gpiochip.
 
 ### To do
 * Investigate I2C acknowledge
 * Investigate Zynqberry
 
-## How to setup
-This entire proces is made and tested on an ubuntu 18.04.5 LTS machine using the Zybo Z20 as a target.
-1. Install buildroot dependencies located in `buildroot/docs/manuals/prerequisits.txt` and copy/replace the `catalog.xml`, `defconfig` and `kconfig` from this repo into the `buildroot/board/mathworks/zynq/boards/zyboz7/` folder.
+## Using the pre-build images
+1. Download a pre-build image from [here](https://github.com/Jeedella/SoC_Z7_MBD_Platform/releases). Make sure the downloaded version corresponds with the used device, either the Zybo z10 or z20.
+2. Unzip the contents onto a FAT32 formatted SD card.
+3. Insert the SD card in the SD card slot on the Zybo and make sure the jumper is set to boot from SD.
+4. Turn on the board and log in using either uart using the micro-sd cable or ssh over ethernet. The image is set to use dhcp by default. If a static IP is desired edit the `interfaces` file on the SD card accordingly.
+   - username = root
+   - password = root
+
+## Manually building the image
+This entire proces is made and tested on an ubuntu 18.04.5 LTS machine using both the Zybo z10 & z20 as a target.
+1. Install buildroot dependencies located in `buildroot/docs/manuals/prerequisits.txt` and copy/replace the `catalog.xml`, `defconfig` and `kconfig` from the `buildroot-config` folder into `buildroot/board/mathworks/zynq/boards/zyboz7/`.
+   ````
+   mv buildroot-config/* buildroot/board/mathworks/zynq/boards/zyboz7/
+   ````
 2. Install [linaro toolchain](https://releases.linaro.org/components/toolchain/binaries/6.3-2017.02/arm-linux-gnueabihf/) in `/opt`. Rename the folder in such a way that the path is: `/opt/linaro/aarch32-6.3.1-2017.02`.
 3. Build the buildroot image: (Will take some time)
 	````
 	cd buildroot
 	./build.py -c board/mathworks/zynq/boards/zyboz7/catalog.xml
 	````
-4. Unzip the `Zybo-Z20-Vivado` project (Vivado 2018.2), make the desired changes to the block diagram, generate a bitstream and export the hardware.
-5. Generate a device tree using the [xilinx device-tree-generator](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842279/Build+Device+Tree+Blob).
+4. Put the buildroot output files (`output/zybo_linux_linaro/images/sdcard/`) on a FAT32 formatted SD card and boot the Zybo from it.
+
+## Creating a bitstream with accompanying device tree
+1. Make sure Vivado 2018.2 is installed together with same version SDK.
+2. Create a vivado project using the provided .tcl files as a basis. In the command below replace the x with the desired zybo version.
+   ````
+   cd zybo-zx0
+   vivado -source init_project.tcl
+   ```
+3. Make the necessary adjustments to the vivado project, generate a bitstream and export the hdf.
+4. Generate a device tree using the [xilinx device-tree-generator](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842279/Build+Device+Tree+Blob).
     ````
-    cd SoC_Z7_MBD_Platform/
     bash /opt/Xilinx/SDK/2018.2/bin/xsct
-    hsi open_hw_design Zybo-Z20-Vivado/Zybo-Z20-Vivado.sdk/matlab_buildroot_top.hdf 
+    hsi open_hw_design buildroot_project/buildroot_project.sdk/matlab_buildroot_top.hdf 
     hsi set_repo_path device-tree-xlnx/
     hsi create_sw_design device_tree -os device_tree -proc ps7_cortexa9_0
     hsi generate_target -dir dts
@@ -42,19 +63,19 @@ This entire proces is made and tested on an ubuntu 18.04.5 LTS machine using the
     ````
     dtc -I dts -O dtb -o dts/devicetree.dtb dts/system-top.dts
     ````
-6. Put the buildroot output files (`buildroot/output/zybo_linux_linaro/images/sdcard`) on a fat32 formatted SD card and boot from it. Scp the `dts/devicetree.dtb` and `Zybo-Z20-Vivado/Zybo-Z20-Vivado.runs/impl_1/matlab_buildroot_top.bit` to the zybo and set them using `fw_setbitsream` and `fw_setdevicetree`. Reboot the Zybo and everything should work.
+5.  Scp the `dts/devicetree.dtb` and `zybo-zx0/buildroot_project/buildroot_project.runs/impl_1/matlab_buildroot_top.bit` to the zybo and set them using `fw_setbitsream` and `fw_setdevicetree`. Reboot the Zybo and everything should work.
 
 ## Test/Demo
 Some small test/demo applications for testing the features included in the image are located in the `test_apps` folder.
 
 ## Pinout
-| Pin | PMOD-B       | PMOD-E       | PMOD-F |
-| --- | ------       | ------------ | ------ |
-| 1   | UARTlite-rx  | I2C0-SCL     | SS[0]  |
-| 2   | UARTlite-tx  | I2C0-SDA     | MOSI   |
-| 3   | UART16550-rx | UARTlite-rx  | MISO   |
-| 4   | UART16550-tx | UARTlite-tx  | SCLK   |
-| 7   | GND          | I2C1-SCL     | GPIO   |
-| 8   | GND          | I2C1-SDA     | GPIO   |
-| 9   | GND          | UART16550-rx | SS[1]  |
-| 10  | GND          | UART16550-tx | SS[2]  |
+| Pin | PMOD-B (z20 only) | PMOD-E       | PMOD-F |
+| --- | ----------------- | ------------ | ------ |
+| 1   | UARTlite-rx       | I2C0-SCL     | SS[0]  |
+| 2   | UARTlite-tx       | I2C0-SDA     | MOSI   |
+| 3   | UART16550-rx      | UARTlite-rx  | MISO   |
+| 4   | UART16550-tx      | UARTlite-tx  | SCLK   |
+| 7   | GND               | I2C1-SCL     | GPIO   |
+| 8   | GND               | I2C1-SDA     | GPIO   |
+| 9   | GND               | UART16550-rx | SS[1]  |
+| 10  | GND               | UART16550-tx | SS[2]  |

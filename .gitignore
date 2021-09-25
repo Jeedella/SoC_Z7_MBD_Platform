@@ -1,3 +1,7 @@
 test_apps/*/build/
-Zybo-Z20-Vivado
 dts
+*/bd/*/
+*/bd/*.*x*
+*/NA/
+*/buildroot_project/*
+*vivado*
