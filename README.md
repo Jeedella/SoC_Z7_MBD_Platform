@@ -19,7 +19,7 @@
 1. Download a pre-build image from [here](https://github.com/Jeedella/SoC_Z7_MBD_Platform/releases). Make sure the downloaded version corresponds with the used device, either the Zybo z10 or z20.
 2. Unzip the contents onto a FAT32 formatted SD card.
 3. Insert the SD card in the SD card slot on the Zybo and make sure the jumper is set to boot from SD.
-4. Turn on the board and log in using either uart using the micro-sd cable or ssh over ethernet. The image is set to use dhcp by default. If a static IP is desired edit the `interfaces` file on the SD card accordingly.
+4. Turn on the board and log in using either uart using the micro-usb cable or ssh over ethernet. The image is set to use dhcp by default. If a static IP is desired edit the `interfaces` file on the SD card accordingly.
    - username = root
    - password = root
 
