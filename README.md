@@ -120,10 +120,10 @@ The buttons are controlling the leds, and three of the switches control the RGB 
 | 0x4121_0000 | axi_gpio_1      | Leds and RGB Leds     |
 | 0x4122_0000 | axi_gpio_2      | PMOD-C and PMOD-D     |
 | 0x43C0_0000 | xadc_wiz_0      | XADC                  |
-| 0x43C1_0000 | axi_uart16550_0 | UART16550             |
-| 0x43C2_0000 | axi_uart16550_1 | UART16550 (z20 only)  |
 | 0x42C0_0000 | axi_uartlite_0  | UARTlite              |
 | 0x42C1_0000 | axi_uartlite_1  | UARTlite (z20 only)   |
+| 0x43C1_0000 | axi_uart16550_0 | UART16550             |
+| 0x43C2_0000 | axi_uart16550_1 | UART16550 (z20 only)  |
 
 ## Userspace listings
 | Description | Path               |
