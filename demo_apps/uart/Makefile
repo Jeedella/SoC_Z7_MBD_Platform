@@ -1,5 +1,5 @@
 # Output file
-TARGET = xadc
+TARGET = demo_uart
 
 # Aplication directories src for .c files, inc for .h files
 SRC_DIR = src
@@ -39,7 +39,7 @@ builddirs:
 # Link everything together
 $(BUILD_DIR)/$(TARGET): $(OBJ)
 	@echo Linking $@
-	$(CC) $(OBJ) $(LDLIBS) -o $(BUILD_DIR)/$(TARGET).app
+	$(CC) $(OBJ) $(LDLIBS) -o $(BUILD_DIR)/$(TARGET)
      
 # Compile c files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
@@ -50,7 +50,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 # Print size information
 size: $(BUILD_DIR)/$(TARGET)
 	@echo
-	$(SIZE) $(BUILD_DIR)/$(TARGET).app
+	$(SIZE) $(BUILD_DIR)/$(TARGET)
 	@echo ELF made
      
 # Clean up

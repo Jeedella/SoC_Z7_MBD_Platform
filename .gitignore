@@ -1,4 +1,4 @@
-test_apps/*/build/
+demo_apps/*/build/
 */dts
 */bd/*/
 */bd/*.*x*

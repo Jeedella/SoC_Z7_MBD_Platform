@@ -50,6 +50,8 @@ entity matlab_buildroot_top is
     gpio_rtl_1_tri_i : in STD_LOGIC_VECTOR ( 3 downto 0 );
     gpio_rtl_2_tri_o : out STD_LOGIC_VECTOR ( 3 downto 0 );
     gpio_rtl_3_tri_o : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    gpio_rtl_4_tri_io : inout STD_LOGIC_VECTOR ( 7 downto 0 );
+    gpio_rtl_5_tri_io : inout STD_LOGIC_VECTOR ( 7 downto 0 );
     uart_rtl_0_rxd : in STD_LOGIC;
     uart_rtl_0_txd : out STD_LOGIC;
     uart_rtl_1_rxd : in STD_LOGIC;
@@ -112,7 +114,9 @@ architecture behavioural of matlab_buildroot_top is
     gpio_rtl_0_tri_i : in STD_LOGIC_VECTOR ( 3 downto 0 );
     gpio_rtl_1_tri_i : in STD_LOGIC_VECTOR ( 3 downto 0 );
     gpio_rtl_2_tri_o : out STD_LOGIC_VECTOR ( 3 downto 0 );
-    gpio_rtl_3_tri_o : out STD_LOGIC_VECTOR ( 2 downto 0 )
+    gpio_rtl_3_tri_o : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    gpio_rtl_4_tri_io : inout STD_LOGIC_VECTOR ( 7 downto 0 );
+    gpio_rtl_5_tri_io : inout STD_LOGIC_VECTOR ( 7 downto 0 )
   );
   end component matlab_buildroot_wrapper;
 begin
@@ -171,6 +175,8 @@ matlab_buildroot_i: component matlab_buildroot_wrapper
       gpio_rtl_0_tri_i(3 downto 0) => gpio_rtl_0_tri_i(3 downto 0),
       gpio_rtl_1_tri_i(3 downto 0) => gpio_rtl_1_tri_i(3 downto 0),
       gpio_rtl_2_tri_o(3 downto 0) => gpio_rtl_2_tri_o(3 downto 0),
-      gpio_rtl_3_tri_o(2 downto 0) => gpio_rtl_3_tri_o(2 downto 0)
+      gpio_rtl_3_tri_o(2 downto 0) => gpio_rtl_3_tri_o(2 downto 0),
+      gpio_rtl_4_tri_io(7 downto 0) => gpio_rtl_4_tri_io(7 downto 0),
+      gpio_rtl_5_tri_io(7 downto 0) => gpio_rtl_5_tri_io(7 downto 0)
     );
 end behavioural;

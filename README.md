@@ -69,35 +69,73 @@ This entire proces is made and tested on an ubuntu 18.04.5 LTS machine using bot
 When using a pre-build image, some test/demo applications are included and accesible in `/mnt/test_apps`.
 The source files for these apps are located in the `test_apps` folder of this repository.
 
+### Peek and Poke
+Reading and writing a value to/of a [memory address](#axi memory map).
+Example to read value of the buttons:
+````
+peek 0x41200008
+````
+Example to turn on led0:
+````
+poke 0x41210000 0x1
+````
+
 ### XADC
 Reading the values of all four XADC channels can be done using:
 ````
-/mnt/test_apps/xadc.app
+demo_xadc
 ````
 
 ### Uart
 For the UART demo, connect the rx and tx of one interface using a male to male jumper wire.
 Pass that corresponding tty as an argument of the app. Below is an example for UARTLite shown.
 ````
-/mnt/test_apps/uart.app /dev/ttyUL1
+demo_uart /dev/ttyUL1
 ````
 It will send and receive `Hello, world!` if all is connected properly.
 
 ### Gpio
 An interactive demo for testing the switches, buttons, leds and RGB leds can be run with:
 ````
-/mnt/test_apps/gpio.app
+demo_gpio
 ````
 The buttons are controlling the leds, and three of the switches control the RGB colors.
 
 ## Pinout
-| Pin | PMOD-B (z20 only) | PMOD-E       | PMOD-F |
-| --- | ----------------- | ------------ | ------ |
-| 1   | UARTlite-rx       | I2C0-SCL     | SS[0]  |
-| 2   | UARTlite-tx       | I2C0-SDA     | MOSI   |
-| 3   | UART16550-rx      | UARTlite-rx  | MISO   |
-| 4   | UART16550-tx      | UARTlite-tx  | SCLK   |
-| 7   | GND               | I2C1-SCL     | GPIO   |
-| 8   | GND               | I2C1-SDA     | GPIO   |
-| 9   | GND               | UART16550-rx | SS[1]  |
-| 10  | GND               | UART16550-tx | SS[2]  |
+| Pin | PMOD-B (z20 only) | PMOD-C | PMOD-D | PMOD-E       | PMOD-F |
+| --- | ----------------- | ------ | ------ | ------------ | ------ |
+| 1   | UARTlite-rx       | GPIO   | GPIO   | I2C0-SCL     | SS[0]  |
+| 2   | UARTlite-tx       | GPIO   | GPIO   | I2C0-SDA     | MOSI   |
+| 3   | UART16550-rx      | GPIO   | GPIO   | UARTlite-rx  | MISO   |
+| 4   | UART16550-tx      | GPIO   | GPIO   | UARTlite-tx  | SCLK   |
+| 7   | GND               | GPIO   | GPIO   | I2C1-SCL     | GPIO   |
+| 8   | GND               | GPIO   | GPIO   | I2C1-SDA     | GPIO   |
+| 9   | GND               | GPIO   | GPIO   | UART16550-rx | SS[1]  |
+| 10  | GND               | GPIO   | GPIO   | UART16550-tx | SS[2]  |
+
+## Axi memory map
+| Address     | IP              | Description           |
+| ----------- | --------------- | --------------------- |
+| 0x4120_0000 | axi_gpio_0      | Switches and buttons  |
+| 0x4121_0000 | axi_gpio_1      | Leds and RGB Leds     |
+| 0x4122_0000 | axi_gpio_2      | PMOD-C and PMOD-D     |
+| 0x43C0_0000 | xadc_wiz_0      | XADC                  |
+| 0x43C1_0000 | axi_uart16550_0 | UART16550             |
+| 0x43C2_0000 | axi_uart16550_1 | UART16550 (z20 only)  |
+| 0x42C0_0000 | axi_uartlite_0  | UARTlite              |
+| 0x42C1_0000 | axi_uartlite_1  | UARTlite (z20 only)   |
+
+## Userspace listings
+| Description | Path               |
+| ----------- | ------------------ |
+| UART16550   | `/dev/ttyS*`       |
+| UARTlite    | `/dev/ttyUL*`      |
+| XADC        | `/dev/iio:device1` |
+| I2C         | `/dev/i2c-*`       |
+| SPI         | `/dev/spidev1.*`   |
+| Switches    | `/dev/gpiochip0`   |
+| Buttons     | `/dev/gpiochip1`   |
+| Leds        | `/dev/gpiochip2`   |
+| RGB Leds    | `/dev/gpiochip3`   |
+| PMOD-C      | `/dev/gpiochip4`   |
+| PMOD-D      | `/dev/gpiochip5`   |

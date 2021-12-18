@@ -1,8 +1,8 @@
 --Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2018.2 (lin64) Build 2258646 Thu Jun 14 20:02:38 MDT 2018
---Date        : Sat Jun 19 19:12:31 2021
---Host        : ubuntu18 running 64-bit Ubuntu 18.04.5 LTS
+--Date        : Sat Dec 18 20:49:34 2021
+--Host        : ubuntu18 running 64-bit Ubuntu 18.04.6 LTS
 --Command     : generate_target matlab_buildroot_wrapper.bd
 --Design      : matlab_buildroot_wrapper
 --Purpose     : IP block netlist
@@ -50,6 +50,8 @@ entity matlab_buildroot_wrapper is
     gpio_rtl_1_tri_i : in STD_LOGIC_VECTOR ( 3 downto 0 );
     gpio_rtl_2_tri_o : out STD_LOGIC_VECTOR ( 3 downto 0 );
     gpio_rtl_3_tri_o : out STD_LOGIC_VECTOR ( 5 downto 0 );
+    gpio_rtl_4_tri_io : inout STD_LOGIC_VECTOR ( 7 downto 0 );
+    gpio_rtl_5_tri_io : inout STD_LOGIC_VECTOR ( 7 downto 0 );
     uart_rtl_0_rxd : in STD_LOGIC;
     uart_rtl_0_txd : out STD_LOGIC;
     uart_rtl_1_baudoutn : out STD_LOGIC;
@@ -139,13 +141,8 @@ architecture STRUCTURE of matlab_buildroot_wrapper is
     IIC_0_0_scl_i : in STD_LOGIC;
     IIC_0_0_scl_o : out STD_LOGIC;
     IIC_0_0_scl_t : out STD_LOGIC;
-    IIC_1_0_sda_i : in STD_LOGIC;
-    IIC_1_0_sda_o : out STD_LOGIC;
-    IIC_1_0_sda_t : out STD_LOGIC;
-    IIC_1_0_scl_i : in STD_LOGIC;
-    IIC_1_0_scl_o : out STD_LOGIC;
-    IIC_1_0_scl_t : out STD_LOGIC;
     gpio_rtl_0_tri_i : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    gpio_rtl_1_tri_i : in STD_LOGIC_VECTOR ( 3 downto 0 );
     uart_rtl_2_baudoutn : out STD_LOGIC;
     uart_rtl_2_ctsn : in STD_LOGIC;
     uart_rtl_2_dcdn : in STD_LOGIC;
@@ -164,7 +161,18 @@ architecture STRUCTURE of matlab_buildroot_wrapper is
     uart_rtl_3_txd : out STD_LOGIC;
     gpio_rtl_2_tri_o : out STD_LOGIC_VECTOR ( 3 downto 0 );
     gpio_rtl_3_tri_o : out STD_LOGIC_VECTOR ( 5 downto 0 );
-    gpio_rtl_1_tri_i : in STD_LOGIC_VECTOR ( 3 downto 0 )
+    IIC_1_0_sda_i : in STD_LOGIC;
+    IIC_1_0_sda_o : out STD_LOGIC;
+    IIC_1_0_sda_t : out STD_LOGIC;
+    IIC_1_0_scl_i : in STD_LOGIC;
+    IIC_1_0_scl_o : out STD_LOGIC;
+    IIC_1_0_scl_t : out STD_LOGIC;
+    gpio_rtl_4_tri_i : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    gpio_rtl_4_tri_o : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    gpio_rtl_4_tri_t : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    gpio_rtl_5_tri_i : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    gpio_rtl_5_tri_o : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    gpio_rtl_5_tri_t : out STD_LOGIC_VECTOR ( 7 downto 0 )
   );
   end component matlab_buildroot;
   component IOBUF is
@@ -187,6 +195,70 @@ architecture STRUCTURE of matlab_buildroot_wrapper is
   signal IIC_1_0_sda_i : STD_LOGIC;
   signal IIC_1_0_sda_o : STD_LOGIC;
   signal IIC_1_0_sda_t : STD_LOGIC;
+  signal gpio_rtl_4_tri_i_0 : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal gpio_rtl_4_tri_i_1 : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal gpio_rtl_4_tri_i_2 : STD_LOGIC_VECTOR ( 2 to 2 );
+  signal gpio_rtl_4_tri_i_3 : STD_LOGIC_VECTOR ( 3 to 3 );
+  signal gpio_rtl_4_tri_i_4 : STD_LOGIC_VECTOR ( 4 to 4 );
+  signal gpio_rtl_4_tri_i_5 : STD_LOGIC_VECTOR ( 5 to 5 );
+  signal gpio_rtl_4_tri_i_6 : STD_LOGIC_VECTOR ( 6 to 6 );
+  signal gpio_rtl_4_tri_i_7 : STD_LOGIC_VECTOR ( 7 to 7 );
+  signal gpio_rtl_4_tri_io_0 : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal gpio_rtl_4_tri_io_1 : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal gpio_rtl_4_tri_io_2 : STD_LOGIC_VECTOR ( 2 to 2 );
+  signal gpio_rtl_4_tri_io_3 : STD_LOGIC_VECTOR ( 3 to 3 );
+  signal gpio_rtl_4_tri_io_4 : STD_LOGIC_VECTOR ( 4 to 4 );
+  signal gpio_rtl_4_tri_io_5 : STD_LOGIC_VECTOR ( 5 to 5 );
+  signal gpio_rtl_4_tri_io_6 : STD_LOGIC_VECTOR ( 6 to 6 );
+  signal gpio_rtl_4_tri_io_7 : STD_LOGIC_VECTOR ( 7 to 7 );
+  signal gpio_rtl_4_tri_o_0 : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal gpio_rtl_4_tri_o_1 : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal gpio_rtl_4_tri_o_2 : STD_LOGIC_VECTOR ( 2 to 2 );
+  signal gpio_rtl_4_tri_o_3 : STD_LOGIC_VECTOR ( 3 to 3 );
+  signal gpio_rtl_4_tri_o_4 : STD_LOGIC_VECTOR ( 4 to 4 );
+  signal gpio_rtl_4_tri_o_5 : STD_LOGIC_VECTOR ( 5 to 5 );
+  signal gpio_rtl_4_tri_o_6 : STD_LOGIC_VECTOR ( 6 to 6 );
+  signal gpio_rtl_4_tri_o_7 : STD_LOGIC_VECTOR ( 7 to 7 );
+  signal gpio_rtl_4_tri_t_0 : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal gpio_rtl_4_tri_t_1 : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal gpio_rtl_4_tri_t_2 : STD_LOGIC_VECTOR ( 2 to 2 );
+  signal gpio_rtl_4_tri_t_3 : STD_LOGIC_VECTOR ( 3 to 3 );
+  signal gpio_rtl_4_tri_t_4 : STD_LOGIC_VECTOR ( 4 to 4 );
+  signal gpio_rtl_4_tri_t_5 : STD_LOGIC_VECTOR ( 5 to 5 );
+  signal gpio_rtl_4_tri_t_6 : STD_LOGIC_VECTOR ( 6 to 6 );
+  signal gpio_rtl_4_tri_t_7 : STD_LOGIC_VECTOR ( 7 to 7 );
+  signal gpio_rtl_5_tri_i_0 : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal gpio_rtl_5_tri_i_1 : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal gpio_rtl_5_tri_i_2 : STD_LOGIC_VECTOR ( 2 to 2 );
+  signal gpio_rtl_5_tri_i_3 : STD_LOGIC_VECTOR ( 3 to 3 );
+  signal gpio_rtl_5_tri_i_4 : STD_LOGIC_VECTOR ( 4 to 4 );
+  signal gpio_rtl_5_tri_i_5 : STD_LOGIC_VECTOR ( 5 to 5 );
+  signal gpio_rtl_5_tri_i_6 : STD_LOGIC_VECTOR ( 6 to 6 );
+  signal gpio_rtl_5_tri_i_7 : STD_LOGIC_VECTOR ( 7 to 7 );
+  signal gpio_rtl_5_tri_io_0 : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal gpio_rtl_5_tri_io_1 : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal gpio_rtl_5_tri_io_2 : STD_LOGIC_VECTOR ( 2 to 2 );
+  signal gpio_rtl_5_tri_io_3 : STD_LOGIC_VECTOR ( 3 to 3 );
+  signal gpio_rtl_5_tri_io_4 : STD_LOGIC_VECTOR ( 4 to 4 );
+  signal gpio_rtl_5_tri_io_5 : STD_LOGIC_VECTOR ( 5 to 5 );
+  signal gpio_rtl_5_tri_io_6 : STD_LOGIC_VECTOR ( 6 to 6 );
+  signal gpio_rtl_5_tri_io_7 : STD_LOGIC_VECTOR ( 7 to 7 );
+  signal gpio_rtl_5_tri_o_0 : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal gpio_rtl_5_tri_o_1 : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal gpio_rtl_5_tri_o_2 : STD_LOGIC_VECTOR ( 2 to 2 );
+  signal gpio_rtl_5_tri_o_3 : STD_LOGIC_VECTOR ( 3 to 3 );
+  signal gpio_rtl_5_tri_o_4 : STD_LOGIC_VECTOR ( 4 to 4 );
+  signal gpio_rtl_5_tri_o_5 : STD_LOGIC_VECTOR ( 5 to 5 );
+  signal gpio_rtl_5_tri_o_6 : STD_LOGIC_VECTOR ( 6 to 6 );
+  signal gpio_rtl_5_tri_o_7 : STD_LOGIC_VECTOR ( 7 to 7 );
+  signal gpio_rtl_5_tri_t_0 : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal gpio_rtl_5_tri_t_1 : STD_LOGIC_VECTOR ( 1 to 1 );
+  signal gpio_rtl_5_tri_t_2 : STD_LOGIC_VECTOR ( 2 to 2 );
+  signal gpio_rtl_5_tri_t_3 : STD_LOGIC_VECTOR ( 3 to 3 );
+  signal gpio_rtl_5_tri_t_4 : STD_LOGIC_VECTOR ( 4 to 4 );
+  signal gpio_rtl_5_tri_t_5 : STD_LOGIC_VECTOR ( 5 to 5 );
+  signal gpio_rtl_5_tri_t_6 : STD_LOGIC_VECTOR ( 6 to 6 );
+  signal gpio_rtl_5_tri_t_7 : STD_LOGIC_VECTOR ( 7 to 7 );
 begin
 IIC_0_0_scl_iobuf: component IOBUF
      port map (
@@ -215,6 +287,118 @@ IIC_1_0_sda_iobuf: component IOBUF
       IO => IIC_1_0_sda_io,
       O => IIC_1_0_sda_i,
       T => IIC_1_0_sda_t
+    );
+gpio_rtl_4_tri_iobuf_0: component IOBUF
+     port map (
+      I => gpio_rtl_4_tri_o_0(0),
+      IO => gpio_rtl_4_tri_io(0),
+      O => gpio_rtl_4_tri_i_0(0),
+      T => gpio_rtl_4_tri_t_0(0)
+    );
+gpio_rtl_4_tri_iobuf_1: component IOBUF
+     port map (
+      I => gpio_rtl_4_tri_o_1(1),
+      IO => gpio_rtl_4_tri_io(1),
+      O => gpio_rtl_4_tri_i_1(1),
+      T => gpio_rtl_4_tri_t_1(1)
+    );
+gpio_rtl_4_tri_iobuf_2: component IOBUF
+     port map (
+      I => gpio_rtl_4_tri_o_2(2),
+      IO => gpio_rtl_4_tri_io(2),
+      O => gpio_rtl_4_tri_i_2(2),
+      T => gpio_rtl_4_tri_t_2(2)
+    );
+gpio_rtl_4_tri_iobuf_3: component IOBUF
+     port map (
+      I => gpio_rtl_4_tri_o_3(3),
+      IO => gpio_rtl_4_tri_io(3),
+      O => gpio_rtl_4_tri_i_3(3),
+      T => gpio_rtl_4_tri_t_3(3)
+    );
+gpio_rtl_4_tri_iobuf_4: component IOBUF
+     port map (
+      I => gpio_rtl_4_tri_o_4(4),
+      IO => gpio_rtl_4_tri_io(4),
+      O => gpio_rtl_4_tri_i_4(4),
+      T => gpio_rtl_4_tri_t_4(4)
+    );
+gpio_rtl_4_tri_iobuf_5: component IOBUF
+     port map (
+      I => gpio_rtl_4_tri_o_5(5),
+      IO => gpio_rtl_4_tri_io(5),
+      O => gpio_rtl_4_tri_i_5(5),
+      T => gpio_rtl_4_tri_t_5(5)
+    );
+gpio_rtl_4_tri_iobuf_6: component IOBUF
+     port map (
+      I => gpio_rtl_4_tri_o_6(6),
+      IO => gpio_rtl_4_tri_io(6),
+      O => gpio_rtl_4_tri_i_6(6),
+      T => gpio_rtl_4_tri_t_6(6)
+    );
+gpio_rtl_4_tri_iobuf_7: component IOBUF
+     port map (
+      I => gpio_rtl_4_tri_o_7(7),
+      IO => gpio_rtl_4_tri_io(7),
+      O => gpio_rtl_4_tri_i_7(7),
+      T => gpio_rtl_4_tri_t_7(7)
+    );
+gpio_rtl_5_tri_iobuf_0: component IOBUF
+     port map (
+      I => gpio_rtl_5_tri_o_0(0),
+      IO => gpio_rtl_5_tri_io(0),
+      O => gpio_rtl_5_tri_i_0(0),
+      T => gpio_rtl_5_tri_t_0(0)
+    );
+gpio_rtl_5_tri_iobuf_1: component IOBUF
+     port map (
+      I => gpio_rtl_5_tri_o_1(1),
+      IO => gpio_rtl_5_tri_io(1),
+      O => gpio_rtl_5_tri_i_1(1),
+      T => gpio_rtl_5_tri_t_1(1)
+    );
+gpio_rtl_5_tri_iobuf_2: component IOBUF
+     port map (
+      I => gpio_rtl_5_tri_o_2(2),
+      IO => gpio_rtl_5_tri_io(2),
+      O => gpio_rtl_5_tri_i_2(2),
+      T => gpio_rtl_5_tri_t_2(2)
+    );
+gpio_rtl_5_tri_iobuf_3: component IOBUF
+     port map (
+      I => gpio_rtl_5_tri_o_3(3),
+      IO => gpio_rtl_5_tri_io(3),
+      O => gpio_rtl_5_tri_i_3(3),
+      T => gpio_rtl_5_tri_t_3(3)
+    );
+gpio_rtl_5_tri_iobuf_4: component IOBUF
+     port map (
+      I => gpio_rtl_5_tri_o_4(4),
+      IO => gpio_rtl_5_tri_io(4),
+      O => gpio_rtl_5_tri_i_4(4),
+      T => gpio_rtl_5_tri_t_4(4)
+    );
+gpio_rtl_5_tri_iobuf_5: component IOBUF
+     port map (
+      I => gpio_rtl_5_tri_o_5(5),
+      IO => gpio_rtl_5_tri_io(5),
+      O => gpio_rtl_5_tri_i_5(5),
+      T => gpio_rtl_5_tri_t_5(5)
+    );
+gpio_rtl_5_tri_iobuf_6: component IOBUF
+     port map (
+      I => gpio_rtl_5_tri_o_6(6),
+      IO => gpio_rtl_5_tri_io(6),
+      O => gpio_rtl_5_tri_i_6(6),
+      T => gpio_rtl_5_tri_t_6(6)
+    );
+gpio_rtl_5_tri_iobuf_7: component IOBUF
+     port map (
+      I => gpio_rtl_5_tri_o_7(7),
+      IO => gpio_rtl_5_tri_io(7),
+      O => gpio_rtl_5_tri_i_7(7),
+      T => gpio_rtl_5_tri_t_7(7)
     );
 matlab_buildroot_i: component matlab_buildroot
      port map (
@@ -263,6 +447,54 @@ matlab_buildroot_i: component matlab_buildroot
       gpio_rtl_1_tri_i(3 downto 0) => gpio_rtl_1_tri_i(3 downto 0),
       gpio_rtl_2_tri_o(3 downto 0) => gpio_rtl_2_tri_o(3 downto 0),
       gpio_rtl_3_tri_o(5 downto 0) => gpio_rtl_3_tri_o(5 downto 0),
+      gpio_rtl_4_tri_i(7) => gpio_rtl_4_tri_i_7(7),
+      gpio_rtl_4_tri_i(6) => gpio_rtl_4_tri_i_6(6),
+      gpio_rtl_4_tri_i(5) => gpio_rtl_4_tri_i_5(5),
+      gpio_rtl_4_tri_i(4) => gpio_rtl_4_tri_i_4(4),
+      gpio_rtl_4_tri_i(3) => gpio_rtl_4_tri_i_3(3),
+      gpio_rtl_4_tri_i(2) => gpio_rtl_4_tri_i_2(2),
+      gpio_rtl_4_tri_i(1) => gpio_rtl_4_tri_i_1(1),
+      gpio_rtl_4_tri_i(0) => gpio_rtl_4_tri_i_0(0),
+      gpio_rtl_4_tri_o(7) => gpio_rtl_4_tri_o_7(7),
+      gpio_rtl_4_tri_o(6) => gpio_rtl_4_tri_o_6(6),
+      gpio_rtl_4_tri_o(5) => gpio_rtl_4_tri_o_5(5),
+      gpio_rtl_4_tri_o(4) => gpio_rtl_4_tri_o_4(4),
+      gpio_rtl_4_tri_o(3) => gpio_rtl_4_tri_o_3(3),
+      gpio_rtl_4_tri_o(2) => gpio_rtl_4_tri_o_2(2),
+      gpio_rtl_4_tri_o(1) => gpio_rtl_4_tri_o_1(1),
+      gpio_rtl_4_tri_o(0) => gpio_rtl_4_tri_o_0(0),
+      gpio_rtl_4_tri_t(7) => gpio_rtl_4_tri_t_7(7),
+      gpio_rtl_4_tri_t(6) => gpio_rtl_4_tri_t_6(6),
+      gpio_rtl_4_tri_t(5) => gpio_rtl_4_tri_t_5(5),
+      gpio_rtl_4_tri_t(4) => gpio_rtl_4_tri_t_4(4),
+      gpio_rtl_4_tri_t(3) => gpio_rtl_4_tri_t_3(3),
+      gpio_rtl_4_tri_t(2) => gpio_rtl_4_tri_t_2(2),
+      gpio_rtl_4_tri_t(1) => gpio_rtl_4_tri_t_1(1),
+      gpio_rtl_4_tri_t(0) => gpio_rtl_4_tri_t_0(0),
+      gpio_rtl_5_tri_i(7) => gpio_rtl_5_tri_i_7(7),
+      gpio_rtl_5_tri_i(6) => gpio_rtl_5_tri_i_6(6),
+      gpio_rtl_5_tri_i(5) => gpio_rtl_5_tri_i_5(5),
+      gpio_rtl_5_tri_i(4) => gpio_rtl_5_tri_i_4(4),
+      gpio_rtl_5_tri_i(3) => gpio_rtl_5_tri_i_3(3),
+      gpio_rtl_5_tri_i(2) => gpio_rtl_5_tri_i_2(2),
+      gpio_rtl_5_tri_i(1) => gpio_rtl_5_tri_i_1(1),
+      gpio_rtl_5_tri_i(0) => gpio_rtl_5_tri_i_0(0),
+      gpio_rtl_5_tri_o(7) => gpio_rtl_5_tri_o_7(7),
+      gpio_rtl_5_tri_o(6) => gpio_rtl_5_tri_o_6(6),
+      gpio_rtl_5_tri_o(5) => gpio_rtl_5_tri_o_5(5),
+      gpio_rtl_5_tri_o(4) => gpio_rtl_5_tri_o_4(4),
+      gpio_rtl_5_tri_o(3) => gpio_rtl_5_tri_o_3(3),
+      gpio_rtl_5_tri_o(2) => gpio_rtl_5_tri_o_2(2),
+      gpio_rtl_5_tri_o(1) => gpio_rtl_5_tri_o_1(1),
+      gpio_rtl_5_tri_o(0) => gpio_rtl_5_tri_o_0(0),
+      gpio_rtl_5_tri_t(7) => gpio_rtl_5_tri_t_7(7),
+      gpio_rtl_5_tri_t(6) => gpio_rtl_5_tri_t_6(6),
+      gpio_rtl_5_tri_t(5) => gpio_rtl_5_tri_t_5(5),
+      gpio_rtl_5_tri_t(4) => gpio_rtl_5_tri_t_4(4),
+      gpio_rtl_5_tri_t(3) => gpio_rtl_5_tri_t_3(3),
+      gpio_rtl_5_tri_t(2) => gpio_rtl_5_tri_t_2(2),
+      gpio_rtl_5_tri_t(1) => gpio_rtl_5_tri_t_1(1),
+      gpio_rtl_5_tri_t(0) => gpio_rtl_5_tri_t_0(0),
       uart_rtl_0_rxd => uart_rtl_0_rxd,
       uart_rtl_0_txd => uart_rtl_0_txd,
       uart_rtl_1_baudoutn => uart_rtl_1_baudoutn,
