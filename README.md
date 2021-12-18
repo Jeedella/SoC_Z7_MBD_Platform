@@ -66,8 +66,8 @@ This entire proces is made and tested on an ubuntu 18.04.5 LTS machine using bot
 5.  Scp the `dts/devicetree.dtb` and `zybo-zx0/buildroot_project/buildroot_project.runs/impl_1/matlab_buildroot_top.bit` to the zybo and set them using `fw_setbitsream` and `fw_setdevicetree`. Reboot the Zybo and everything should work.
 
 ## Test/Demo
-When using a pre-build image, some test/demo applications are included and accesible in `/mnt/test_apps`.
-The source files for these apps are located in the `test_apps` folder of this repository.
+When using a pre-build image, some test/demo applications are included and accesible in `/mnt/demo_apps` (also copied to `/usr/bin/` for easier access).
+The source files for these apps are located in the `demo_apps` folder of this repository.
 
 ### Peek and Poke
 Reading and writing a value to/of a memory address.
