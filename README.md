@@ -70,7 +70,7 @@ When using a pre-build image, some test/demo applications are included and acces
 The source files for these apps are located in the `test_apps` folder of this repository.
 
 ### Peek and Poke
-Reading and writing a value to/of a [memory address](#axi memory map).
+Reading and writing a value to/of a memory address.
 Example to read value of the buttons:
 ````
 peek 0x41200008
