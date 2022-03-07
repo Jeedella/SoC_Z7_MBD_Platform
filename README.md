@@ -7,13 +7,16 @@
 * PS uart, uartlite and uart16550.
   * 1x uartlite and uart16550 on the Zybo z10.
   * 2x uartlite and uart16550 on the Zybo z20.
-* 2 x PS I2C. (Listed in user space but not yet tested in C app).
+* 2 x PS I2C.
 * PS spi controller with 3 slave selects. (Listed in user space but not yet tested in C app).
 * Switches, buttons, leds and rgb leds accessible in user space using gpiochip.
 
 ### To do
-* Investigate I2C acknowledge
-* Investigate Zynqberry
+* ~Investigate I2C acknowledge~
+  * Zynq 7000 built-in I2C controller supports ACK/NACK configuration, but [the cadence driver](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842160/Cadence+I2C+Driver) always sets bit 3 of the [I2C control register (pag 1365)](https://www.xilinx.com/support/documentation/user_guides/ug585-Zynq-7000-TRM.pdf). Manually setting bit 3 of the control register, through busybox's devmem, seems to not work after the cadence driver is loaded. The cadence driver can be adjusted and recompiled(not tested), but this would make ACK/NACK not configurable on the fly. This can be possibly be solved with a custom driver/application.
+  * [The LogiCORE™ IP AXI IIC Bus Interface](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18841974/Linux+I2C+Driver) (I2C in PL) has the same issue. The hardware supports ACK/NACK configuration, but it would require a custom driver/application.
+  * From userspace, the i2c-transactions allow for [some possibile modifications](https://www.kernel.org/doc/html/latest/i2c/i2c-protocol.html?highlight=nack#modified-transactions) related to ACK/NACK.
+* ~Investigate Zynqberry~
 
 ## Using the pre-build images
 1. Download a pre-build image from [here](https://github.com/Jeedella/SoC_Z7_MBD_Platform/releases). Make sure the downloaded version corresponds with the used device, either the Zybo z10 or z20.
@@ -44,6 +47,11 @@ This entire proces is made and tested on an ubuntu 18.04.5 LTS machine using bot
    cd zybo-zx0
    vivado -source init_project.tcl
    ````
+   > The Vivado project can also be opened in Windows, using the command prompt:
+   > ````
+   > cd C:\Users\<username>\Downloads\SoC_Z7_MBD_Platform-master\SoC_Z7_MBD_Platform-master\zybo-10\
+   > C:\Xilinx\Vivado\2018.2\settings64.bat
+   > vivado -source init_project.tcl
 3. Make the necessary adjustments to the vivado project, generate a bitstream and export the hdf.
 4. Generate a device tree using the [xilinx device-tree-generator](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842279/Build+Device+Tree+Blob), which is included with the SDK.
     ````
@@ -79,6 +87,7 @@ Example to turn on led0:
 ````
 poke 0x41210000 0x1
 ````
+> Busybox's devmem is a good alternative for peek and poke, especially since it is included in MATLAB's image by default, unlike peek and poke.
 
 ### XADC
 Reading the values of all four XADC channels can be done using:
